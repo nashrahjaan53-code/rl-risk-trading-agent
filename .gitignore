@@ -1,0 +1,4 @@
+__pycache__/
+tensorboard_logs/
+ppo_risk_trading_agent.zip
+.env
