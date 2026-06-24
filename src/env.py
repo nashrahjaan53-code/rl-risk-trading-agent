@@ -77,3 +77,13 @@ class RiskConstrainedTradingEnv(gym.Env):
         info = {'net_worth': self.net_worth, 'drawdown': drawdown}
         
         return obs, reward, terminated, truncated, info
+if __name__ == "__main__":
+    from data_pipeline import fetch_and_prepare_data
+    df = fetch_and_prepare_data("AAPL", "2024-01-01", "2025-01-01")
+    env = RiskConstrainedTradingEnv(df, max_drawdown_limit=0.10)
+    obs, info = env.reset()
+    
+    print("\nEnvironment Initialized Successfully!")
+    print(f"Initial Observation (Price, RSI, MACD, Drawdown): {obs}")
+    obs, reward, terminated, truncated, info = env.step(2)
+    print(f"Step executed successfully! Next Obs: {obs}, Reward: {reward}, Info: {info}")  
